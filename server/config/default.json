@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://Semal:mongodbatlas@semal0.xjjph.mongodb.net/Students?retryWrites=true&w=majority"
+}
