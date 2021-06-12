@@ -48,7 +48,7 @@ const App = () => {
             />
           </Route>
           <Route exactpath="/dashboard">
-            <Dashboard />
+            <Dashboard isUser={isUser}/>
           </Route>
         </Switch>
       </Router>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios'
 import {
   useHistory
 } from "react-router-dom";
@@ -30,10 +31,23 @@ const Form = ({
   };
 
   const handleLogin = () => {
-      if(user=='semal@gmail.com' && password=='semal'){
-        setIsUser(true);
-        history.push('/dashboard');
-      }
+      axios.post('http://localhost:8080/users/authenticate',{
+        email:user,
+        password:password
+      })
+      .then((response) => {
+        console.log(response);
+        if(response.data.length > 0){
+          setIsUser(true);
+          history.push('/dashboard');
+        }
+        else{
+          setUserError('Credentials does not match');
+          setPasswordError('Credentials does not match');
+        }
+      }, (error) => {
+        console.log(error);
+      });
   }
 
   const handleSignup = () => {

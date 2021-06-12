@@ -122,52 +122,42 @@ button {
   font-size: 16px;
 }
 
-.dashboard {
-  width: 100%;
-  min-height: 100vh;
-  background: radial-gradient(
-    ellipse at left bottom,
-    #ad1c1c 0%,
-    #FB7C7C 59%,
-    #f0a0a0 100%
-  );
-}
-
-.dashboard nav {
-  background: #28df99;  
-  width: 100%;
-  padding: 20px 40px;
+.dashboard-main{
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  /* flex-direction: column;
+  background-color: #FB7C7C; */
+  width: 100vw;
+  height: 100vh;
 }
 
-.dashboard nav h2 {
-  color: #fff;
+.heading-line{
+  /* background-color: aqua; */
+  width: 100vw;
+  height: 5vh;
 }
 
-.dashboard nav button {
-  width: 86px;
-  padding: 8px 0px;
-  background: #FB7C7C;
+.second-line{
+  /* background-color:brown; */
+  width: 100vw;
+  height: 10vh;
 }
 
-.dashboard .info p{
-  padding-left: 20px;
-  padding-top: 20px;
-  color: black;
-  font-size: 20px;
-}
-
-.dashboard .info{
-  width: 100%;
-  max-width: 600px;
-  min-height: 250px;
-  margin: auto;
-  margin-top: 10%;
+.container{
+  /* background-color: lightpink; */
+  width: 100vw;
+  height: 85vh;
   display: flex;
+  flex-direction: column;
 }
 
-.dashboard .info .material-icons {
-  font-size: 220px;
+.filters{
+  /* background-color: white; */
+  width: 100vw;
+  height: 10vh;
+}
+
+.content{
+  /* background-color: whitesmoke; */
+  width: 100vw;
+  height: 75vh;
 }
