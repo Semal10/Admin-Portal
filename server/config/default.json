@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://Semal:mongodbatlas@semal0.xjjph.mongodb.net/test"
+  "mongoURIProd": "mongodb+srv://Semal:mongodbatlas@semal0.xjjph.mongodb.net/test",
+  "mongoURIDev": "mongodb://Semal:mongodbatlas@mongo:27017/test"
 }

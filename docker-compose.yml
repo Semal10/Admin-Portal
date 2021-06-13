@@ -10,6 +10,8 @@ services:
       - "./server:/server"
       - /server/node_modules
     restart: always
+    depends_on: 
+      - mongo
   client:
     build:
       context: ./client
@@ -25,6 +27,8 @@ services:
   mongo:
     image: mongo
     restart: always
+    ports:
+      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: Semal 
       MONGO_INITDB_ROOT_PASSWORD: mongodbatlas
