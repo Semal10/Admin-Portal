@@ -108,7 +108,7 @@ const Form = ({
         {toggle ? (
           <>
             <div className="btnContainer">
-              <button onClick={handleLogin}>Sign in</button>
+              <button onClick={handleLogin}><span style={{fontSize:'1.5em'}}>Sign in</span></button>
               <p>
                 Don't have an account?
                 <span
@@ -126,7 +126,7 @@ const Form = ({
         ) : (
           <>
             <div className="btnContainer">
-              <button onClick={handleSignup}>Sign up</button>
+              <button onClick={handleSignup}><span style={{fontSize:'1.5em'}}>Sign up</span></button>
               <p>
                 Have an account?
                 <span

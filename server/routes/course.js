@@ -1,9 +1,11 @@
 const express = require("express");
 const Student = require("../models/Students");
+const UserAuth = require('../helpers/UserAuth');
 
 const router = express.Router();
 
-router.post('/add', (req, res) => {
+router.post('/add', UserAuth,(req, res) => {
+  if(req.user.role!=='admin') res.status(401).json({'type':'Unauthorized'});
   Student.findOneAndUpdate(
     { userId: req.body.userId },
     { courses: req.body.courses },

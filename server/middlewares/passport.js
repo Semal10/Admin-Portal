@@ -4,8 +4,17 @@ const { Strategy, ExtractJwt } = require("passport-jwt");
 
 const SECRET = config.get("SECRET");
 
+const cookieExtractor = (req) => {
+  //console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+  let token = null;
+  //console.log(req);
+  console.log(req.cookies.jwt);
+  if (req && req.cookies) token = req.cookies['jwt'];
+  return token;
+};
+
 const opt = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: cookieExtractor,
   secretOrKey: SECRET,
 };
 
@@ -18,7 +27,7 @@ module.exports = (passport) => {
           else return done(null, false);
         })
         .catch((err) => {
-          return done(null,false);
+          return done(null, false);
         });
     })
   );

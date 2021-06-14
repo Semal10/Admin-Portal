@@ -3,8 +3,13 @@ const User = require("../models/Users");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const SECRET = config.get("SECRET");
+const UserAuth = require('../helpers/UserAuth');
 
 const router = express.Router();
+
+router.get("/whoami", UserAuth, (req, res) => {
+  res.json(req.user);
+});
 
 router.post("/signup", (req, res) => {
   const newUser = new User({
@@ -23,34 +28,39 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  let user = await User.find({
-    email: req.body.email,
-    password: req.body.password,
-  });
-  user = user[0];
+  try {
+    let user = await User.find({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    user = user[0];
 
-  const token = jwt.sign(
-    {
-      userId: user._id,
-      email: user.email,
-      role: user.role,
-    },
-    SECRET,
-    {
-      expiresIn: "7 days",
-    }
-  );
-  res
-    .header("x-auth-header", token)
-    .status(200)
-    .json({
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        email: user.email,
+        role: user.role,
+      },
+      SECRET,
+      {
+        expiresIn: "7 days",
+      }
+    );
+
+    res.cookie("jwt", token, { httpOnly: true });
+    res.status(200).json({
       id: user._id,
       email: user.email,
-      password: user.password,
       role: user.role,
-      token: `Bearer ${token}`,
-      expiresIn: 168,
     });
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+router.post('/logout',UserAuth,(req, res) => {
+  res.clearCookie("jwt", { httpOnly: true });
+  res.json({'type':'Logout Successful'});
 });
 
 module.exports = router;
