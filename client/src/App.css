@@ -168,6 +168,7 @@ button {
 
 .navigations{
   display: flex;
+  align-items: center;
 }
 
 .left-heading{
@@ -204,6 +205,7 @@ button {
 
 .student-heading{
   color: #142542;
+  margin-bottom: 0;
 }
 
 .student-icon{
@@ -231,9 +233,13 @@ button {
 }
 
 .filters{
-  background-color: rgb(163, 59, 59);
+  /* background-color: rgb(163, 59, 59); */
   width: 100vw;
   height: 10vh;
+  display: flex;
+  padding-left: 22.5%;
+  align-items: center;
+  font-size: 30px;
 }
 
 .content{
@@ -241,4 +247,119 @@ button {
   padding: 0px 10%;
   width: 100vw;
   height: 75vh;
+  overflow-x: hidden;
+}
+
+.drawer-container, .drawer-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.drawer-profile{
+  width: 150px;
+}
+
+.drawer-info h1{
+  margin-bottom: 50px;
+}
+
+.course{
+  margin-right: 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #37474f;
+  background: #eceff1;
+  padding: 5px 10px;
+  border-radius: 50px;
+}
+
+.ant-button{
+  margin-top: 20px;
+  width: 150px;
+}
+
+.courses-list{
+  display: flex;
+  /* justify-content: space-evenly; */
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.course-title{
+  color: #1e61dc;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.edit-mode{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.course-console{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.spin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  margin-right: 500px;
+}
+
+/* .custom-antd-drawer {
+  width: 500px !important;
+} */
+
+.ant-drawer-content-wrapper {
+  position: absolute;
+  width: 500px !important;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1100px) {
+  .heading-line {
+    padding: 0px 30px;
+  }
+
+  .second-line {
+    padding: 0px 30px;
+  }
+
+  .content {
+    padding: 0 5%;
+  }
+
+  .filters {
+    padding: 0 5%;
+    max-width: 100vw;
+    width: 1000px;
+    display: grid;
+    place-items: center center;
+  }
+
+  .ant-drawer-content-wrapper {
+    position: absolute;
+    width: 400px !important;
+    height: 100%;
+  }
+  /* .custom-antd-drawer {
+    width: 400px !important;
+  } */
+  .spin {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    place-items: center center;
+    min-height: 50vh;
+    margin-right: 0;
+  }
 }
