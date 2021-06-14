@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import axios from 'axios'
-import {
-  useHistory
-} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+//import Cookies from 'js-cookie';
+
+import { useHistory } from "react-router-dom";
 
 const Form = ({
   user,
@@ -13,48 +13,76 @@ const Form = ({
   setUserError,
   passwordError,
   setPasswordError,
-  isUser,
-  setIsUser,
+  userState,
+  setUserState,
 }) => {
-
   const history = useHistory();
   const [toggle, setToggle] = useState(false);
-    
+
+  useEffect(() => {
+    console.log(userState);
+    if (userState.type === "Failure") {
+      history.push("/login");
+    } else if (userState.type === "Success") {
+      history.push("/dashboard");
+    } else {
+      return <div>Loading...</div>;
+    }
+  }, [userState]);
+
   const clearInputs = () => {
-    setUser('');
-    setPassword('');
+    setUser("");
+    setPassword("");
   };
 
   const clearErrors = () => {
-    setUserError('');
-    setPasswordError('');
+    setUserError("");
+    setPasswordError("");
   };
 
   const handleLogin = () => {
-      axios.post('http://localhost:8080/users/login',{
-        email:user,
-        password:password
-      })
-      .then((response) => {
-        console.log(response);
-        if(response.data.role === 'admin'){
-          setIsUser(true);
-          history.push('/dashboard');
-          localStorage.setItem('auth-token',JSON.stringify(response.data.token));
+    axios
+      .post(
+        "http://localhost:8080/users/login",
+        {
+          email: user,
+          password: password,
+        },
+        { withCredentials: true }
+      )
+      .then(
+        (response) => {
+          if (response.data) {
+            axios
+              .get("http://localhost:8080/users/whoami", {
+                withCredentials: true,
+              })
+              .then((response) => {
+                setUserState({
+                  type: "Success",
+                  role: response.data.role,
+                });
+              })
+              .catch((err) => {
+                setUserState({
+                  type: "Failure",
+                  role: "none",
+                });
+              });
+            history.push("/dashboard");
+          } else {
+            setUserError("Credentials does not match");
+            setPasswordError("Credentials does not match");
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-        else{
-          setUserError('Credentials does not match');
-          setPasswordError('Credentials does not match');
-        }
-      }, (error) => {
-        console.log(error);
-      });
-  }
+      );
+  };
 
-  const handleSignup = () => {
+  const handleSignup = () => {};
 
-  }
-  
   return (
     <section className="login">
       <div className="loginContainer">
@@ -103,7 +131,7 @@ const Form = ({
                 Have an account?
                 <span
                   onClick={() => {
-                    setToggle(!toggle)
+                    setToggle(!toggle);
                     clearInputs();
                     clearErrors();
                   }}

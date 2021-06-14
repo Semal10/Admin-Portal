@@ -1,14 +1,19 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
-const Home = ({isUser}) => {    
+const Home = ({userState}) => {    
     const history = useHistory();
-
-    if(!isUser){
+    console.log(userState);
+    if(userState.type==='Failure'){
         history.push('/login');
     }
-    else{
+    else if(userState.type==='Success'){
         history.push('/dashboard');
+    }
+    else{
+        return(
+            <div>Loading...</div>
+        );
     }
 
     return(

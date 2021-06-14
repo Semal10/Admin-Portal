@@ -363,3 +363,10 @@ button {
     margin-right: 0;
   }
 }
+
+.unauthorized{
+  display: grid;
+  place-items: center;
+  place-content: center;
+  min-height: 50vh;
+}

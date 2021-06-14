@@ -3,6 +3,7 @@ import Form from "./Form";
 import Dashboard from "./Dashboard";
 import Home from './Home';
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import {
   Switch,
   Route,
@@ -15,27 +16,30 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [userError, setUserError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [isUser, setIsUser] = useState(false);
+  const [userState, setUserState] = useState({type:'Loading',role:'none'});
 
   const history = useHistory();
 
   useEffect(() => {
-    if(localStorage.getItem('auth-token')){
-      console.log('=======================================');
-      setIsUser(true);
-      if(history) history.push('/dashboard');
-    }
-    if (!isUser && history) {
-      history.push("/login");
-    }
-  }, [isUser]);
+    axios.get('http://localhost:8080/users/whoami',{withCredentials:true}).then(response => {
+      setUserState({
+        type:'Success',
+        role: response.data.role
+      });
+    }).catch(err => {
+      setUserState({
+        type:'Failure',
+        role:'none'
+      });
+    });
+  }, []);
 
   return (
     <div className="App">
       <Router history={history}>
         <Switch>
           <Route exact path='/'>
-            <Home isUser={isUser}/>
+            <Home userState={userState}/>
           </Route>
           <Route exact path="/login">
             <Form
@@ -47,12 +51,12 @@ const App = () => {
               setUserError={setUserError}
               passwordError={passwordError}
               setPasswordError={setPasswordError}
-              isUser={isUser}
-              setIsUser={setIsUser}
+              userState={userState}
+              setUserState={setUserState}
             />
           </Route>
           <Route exactpath="/dashboard">
-            <Dashboard isUser={isUser}/>
+            <Dashboard userState={userState}/>
           </Route>
         </Switch>
       </Router>

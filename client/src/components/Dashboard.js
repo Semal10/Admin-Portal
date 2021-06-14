@@ -10,7 +10,7 @@ import availableCourses from "../utils/courses";
 import menu from "../utils/menu";
 import "antd/dist/antd.css";
 
-const Dashboard = ({ isUser }) => {
+const Dashboard = ({ userState }) => {
   const history = useHistory();
   const [list, setList] = useState([]);
   const [visible, setVisible] = useState(false);
@@ -31,21 +31,29 @@ const Dashboard = ({ isUser }) => {
     setIsEdit(false);
   };
 
-  // if(!isUser){
-  //     history.push('/login');
-  // }
-  // else{
-  //     history.push('/dashboard');
-  // }
+  useEffect(() => {
+    console.log(userState);
+    if(userState.type==='Failure'){
+        history.push('/login');
+    }
+    else if(userState.type==='Success'){
+        history.push('/dashboard');
+    }
+    else{
+        return(
+            <div>Loading...</div>
+        );
+    }
+  },[userState])
 
   useEffect(() => {
     setIsLoading(true);
     axios
       .get(
-        `http://localhost:8080/students?limit=${perPage}&page=${currentPage}`
+        `http://localhost:8080/students?limit=${perPage}&page=${currentPage}`,
+        { withCredentials: true }
       )
       .then((res) => {
-        console.log("++++++++++++", res.data);
         setList(res.data.result);
         setTableCount(res.data.count);
         setIsLoading(false);
@@ -136,7 +144,7 @@ const Dashboard = ({ isUser }) => {
           <h1 className="student-heading">Students</h1>
           <div className="student-count">{tableCount}</div>
         </div>
-        <Container
+        {userState.role==='admin'? <><Container
           list={list}
           visible={visible}
           isEdit={isEdit}
@@ -153,7 +161,8 @@ const Dashboard = ({ isUser }) => {
           setItem={setItem}
           setIsEdit={setIsEdit}
           setUpdatedCourses={setUpdatedCourses}
-        />
+        /></> : <><h1 className='unauthorized'>You Are Unauthorized! Go Back To Studies :)</h1></>}
+        
       </div>
     </div>
   );
