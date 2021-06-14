@@ -31,15 +31,16 @@ const Form = ({
   };
 
   const handleLogin = () => {
-      axios.post('http://localhost:8080/users/authenticate',{
+      axios.post('http://localhost:8080/users/login',{
         email:user,
         password:password
       })
       .then((response) => {
         console.log(response);
-        if(response.data.length > 0){
+        if(response.data.role === 'admin'){
           setIsUser(true);
           history.push('/dashboard');
+          localStorage.setItem('auth-token',JSON.stringify(response.data.token));
         }
         else{
           setUserError('Credentials does not match');

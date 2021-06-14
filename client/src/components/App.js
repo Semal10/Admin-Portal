@@ -1,5 +1,4 @@
-import logo from "./logo.svg";
-import "./App.css";
+import "../styles/index.css";
 import Form from "./Form";
 import Dashboard from "./Dashboard";
 import Home from './Home';
@@ -21,10 +20,15 @@ const App = () => {
   const history = useHistory();
 
   useEffect(() => {
+    if(localStorage.getItem('auth-token')){
+      console.log('=======================================');
+      setIsUser(true);
+      if(history) history.push('/dashboard');
+    }
     if (!isUser && history) {
       history.push("/login");
     }
-  }, []);
+  }, [isUser]);
 
   return (
     <div className="App">
@@ -52,18 +56,6 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-      {/* <Form
-        user={user}
-        setUser={setUser}
-        password={password}
-        setPassword={setPassword}
-        userError={userError}
-        setUserError={setUserError}
-        passwordError={passwordError}
-        setPasswordError={setPasswordError}
-        isUser={isUser}
-        setIsUser={setIsUser}
-      /> */}
     </div>
   );
 };
