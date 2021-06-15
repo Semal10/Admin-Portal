@@ -39,6 +39,16 @@ students.
 *  Install with [`node`](https://nodejs.org/en/download/) & run following commands on both client and server directory
     + `$ npm install`
     + `$ npm start`
+
+## Credentials
+
+*  Admin (Can access portal dashboard, see the list of all students, modify their data)
+    + `Email : admin@gmail.com`
+    + `Password : admin`
+    
+*  User (Cannot access portal dashboard, Unauthorized to see the list of all students & modify)
+    + `Email : user@gmail.com`
+    + `Password : user`    
     
 
 ## Live Demo
