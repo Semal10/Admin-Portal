@@ -32,7 +32,6 @@ const Dashboard = ({ userState }) => {
   };
 
   useEffect(() => {
-    console.log(userState);
     if(userState.type==='Failure'){
         history.push('/login');
     }
@@ -144,7 +143,7 @@ const Dashboard = ({ userState }) => {
           <h1 className="student-heading">Students</h1>
           <div className="student-count">{tableCount}</div>
         </div>
-        {true? <><Container
+        {userState.role === 'admin' ? <><Container
           list={list}
           visible={visible}
           isEdit={isEdit}

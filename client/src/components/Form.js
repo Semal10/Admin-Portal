@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-//import Cookies from 'js-cookie';
 
 import { useHistory } from "react-router-dom";
 
@@ -20,7 +19,6 @@ const Form = ({
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
-    console.log(userState);
     if (userState.type === "Failure") {
       history.push("/login");
     } else if (userState.type === "Success") {
@@ -81,7 +79,24 @@ const Form = ({
       );
   };
 
-  const handleSignup = () => {};
+  const handleSignup = () => {
+    axios
+      .post(
+        "http://localhost:8080/users/signup",
+        {
+          email: user,
+          password: password,
+        },
+        { withCredentials: true }
+      )
+      .then(response => {
+        setToggle(!toggle);
+        clearInputs();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  };
 
   return (
     <section className="login">

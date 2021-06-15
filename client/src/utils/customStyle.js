@@ -6,7 +6,6 @@ const customStyle = {
   },
   rows: {
     style: {
-      // width: "800px",
     },
   },
   headCells: {
@@ -16,7 +15,6 @@ const customStyle = {
   },
   headRow: {
     style: {
-      // width: "800px",
       borderBottomWidth: "0px",
       marginBottom: "10px",
       "&:nth-child(2)": {

@@ -9,7 +9,6 @@ const columns = [
     name: "Name",
     selector: "name",
     //sortable: true,
-    // width: "300px",
     style: {
       fontWeight: "600",
     },
@@ -18,7 +17,6 @@ const columns = [
     name: "Age",
     selector: "age",
     //sortable: true,
-    // width: "200px",
     hide: "sm",
   },
   {

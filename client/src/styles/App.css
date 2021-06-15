@@ -26,7 +26,7 @@ button {
   background: #e9e9e9;
   display: flex;
   background-image: url('../images/stanford.jpg');
-  background-size: 100%;
+  background-size:auto;
 }
 
 .login .loginContainer {
@@ -314,7 +314,6 @@ button {
   justify-content: center;
   align-items: center;
   min-height: 50vh;
-  margin-right: 500px;
 }
 
 /* .custom-antd-drawer {
@@ -454,4 +453,5 @@ button {
   place-items: center;
   place-content: center;
   min-height: 50vh;
+  margin: 0 10px;
 }
