@@ -144,7 +144,7 @@ const Dashboard = ({ userState }) => {
           <h1 className="student-heading">Students</h1>
           <div className="student-count">{tableCount}</div>
         </div>
-        {userState.role==='admin'? <><Container
+        {true? <><Container
           list={list}
           visible={visible}
           isEdit={isEdit}

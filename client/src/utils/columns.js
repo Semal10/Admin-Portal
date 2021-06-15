@@ -2,6 +2,7 @@ const columns = [
   {
     name: "ID",
     selector: "userId",
+    width: "100px",
     //sortable: true,0
   },
   {
@@ -24,8 +25,9 @@ const columns = [
     name: "Gender",
     selector: "gender",
     //sortable: true,
-    // width: "100px",
+    width: "150px",
     hide: "md",
+
   },
 ];
 

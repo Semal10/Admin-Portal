@@ -327,7 +327,15 @@ button {
   height: 100%;
 }
 
+.content {
+  width: 70vw;
+}
+
 @media only screen and (max-width: 1100px) {
+  .content {
+    width: 100vw;
+  }
+
   .heading-line {
     padding: 0px 30px;
   }
@@ -363,6 +371,81 @@ button {
     place-items: center center;
     min-height: 50vh;
     margin-right: 0;
+  }
+}
+
+
+
+@media only screen and (max-width: 425px) {
+  .content {
+    width: 100vw;
+  }
+  
+  .heading-line {
+    padding: 0px 20px;
+  }
+
+  .second-line {
+    padding: 0px 20px;
+  }
+
+  .home-icon {
+    width: 20px;
+    display: grid;
+    margin: 0px 15px;
+  }
+
+  .manage-icon {
+    width: 20px;
+    display: grid;
+    margin: 0px 15px;
+  }
+
+  .home-icon, .manage-icon {
+    margin: 0px 15px;
+  }
+
+  .home-title {
+    display: none;
+  }
+
+  .manage-title {
+    display: none;
+  }
+
+  .navigations {
+    margin-left: 20px;
+  }
+
+  .user-profile {
+    display: grid;
+    width: 15px;
+  }
+
+  .down-arrow {
+    width: 10px;
+    display: grid;
+  }
+
+  .student-icon {
+    width: 35px;
+  }
+
+  .student-heading {
+    font-size: 22px;
+  }
+
+  .student-count {
+    font-size: 12px;
+    padding: 3px 7px;
+  }
+
+  .filters {
+    font-size: 22px;
+  }
+
+  .ant-drawer-content-wrapper {
+    width: 100vw !important;
   }
 }
 
