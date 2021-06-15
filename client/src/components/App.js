@@ -1,14 +1,16 @@
 import "../styles/index.css";
 import Form from "./Form";
 import Dashboard from "./Dashboard";
-import Home from './Home';
+import Home from "./Home";
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
+import { SERVER_ORIGIN } from "../config";
+
 import {
   Switch,
   Route,
   BrowserRouter as Router,
-  useHistory
+  useHistory,
 } from "react-router-dom";
 
 const App = () => {
@@ -16,30 +18,36 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [userError, setUserError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [userState, setUserState] = useState({type:'Loading',role:'none'});
+  const [userState, setUserState] = useState({ type: "Loading", role: "none" });
 
   const history = useHistory();
 
   useEffect(() => {
-    axios.get('http://localhost:8080/users/whoami',{withCredentials:true}).then(response => {
-      setUserState({
-        type:'Success',
-        role: response.data.role
+    axios
+      .get(`${SERVER_ORIGIN}users/whoami`, {
+        withCredentials: true,
+        credentials: true,
+      })
+      .then((response) => {
+        setUserState({
+          type: "Success",
+          role: response.data.role,
+        });
+      })
+      .catch((err) => {
+        setUserState({
+          type: "Failure",
+          role: "none",
+        });
       });
-    }).catch(err => {
-      setUserState({
-        type:'Failure',
-        role:'none'
-      });
-    });
   }, []);
 
   return (
     <div className="App">
       <Router history={history}>
         <Switch>
-          <Route exact path='/'>
-            <Home userState={userState}/>
+          <Route exact path="/">
+            <Home userState={userState} />
           </Route>
           <Route exact path="/login">
             <Form
@@ -56,7 +64,7 @@ const App = () => {
             />
           </Route>
           <Route exactpath="/dashboard">
-            <Dashboard userState={userState}/>
+            <Dashboard userState={userState} />
           </Route>
         </Switch>
       </Router>

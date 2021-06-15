@@ -9,6 +9,7 @@ import { Dropdown } from "antd";
 import availableCourses from "../utils/courses";
 import menu from "../utils/menu";
 import "antd/dist/antd.css";
+import { SERVER_ORIGIN } from '../config';
 
 const Dashboard = ({ userState }) => {
   const history = useHistory();
@@ -49,7 +50,7 @@ const Dashboard = ({ userState }) => {
     setIsLoading(true);
     axios
       .get(
-        `http://localhost:8080/students?limit=${perPage}&page=${currentPage}`,
+        `${SERVER_ORIGIN}students?limit=${perPage}&page=${currentPage}`,
         { withCredentials: true }
       )
       .then((res) => {
@@ -68,7 +69,7 @@ const Dashboard = ({ userState }) => {
     item.courses = updatedCourses;
     delete item["_id"];
     axios
-      .post("http://localhost:8080/courses/add", {
+      .post(`${SERVER_ORIGIN}courses/add`, {
         userId: item.userId,
         courses: item.courses,
       })
@@ -160,8 +161,8 @@ const Dashboard = ({ userState }) => {
           setItem={setItem}
           setIsEdit={setIsEdit}
           setUpdatedCourses={setUpdatedCourses}
-        /></> : <><h1 className='unauthorized'>You Are Unauthorized! Go Back To Studies :)</h1></>}
-        
+        /></> : <></>}
+        {(userState.role === 'user' && userState.type === 'Success') ? <h1 className='unauthorized'>You Are Unauthorized! Go Back To Studies :)</h1> : <></>}
       </div>
     </div>
   );

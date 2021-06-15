@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { SERVER_ORIGIN } from "../config";
 import { useHistory } from "react-router-dom";
 
 const Form = ({
@@ -41,7 +41,7 @@ const Form = ({
   const handleLogin = () => {
     axios
       .post(
-        "http://localhost:8080/users/login",
+        `${SERVER_ORIGIN}users/login`,
         {
           email: user,
           password: password,
@@ -52,8 +52,9 @@ const Form = ({
         (response) => {
           if (response.data) {
             axios
-              .get("http://localhost:8080/users/whoami", {
+              .get(`${SERVER_ORIGIN}users/whoami`, {
                 withCredentials: true,
+                credentials: true
               })
               .then((response) => {
                 setUserState({
@@ -82,20 +83,20 @@ const Form = ({
   const handleSignup = () => {
     axios
       .post(
-        "http://localhost:8080/users/signup",
+        `${SERVER_ORIGIN}users/signup`,
         {
           email: user,
           password: password,
         },
         { withCredentials: true }
       )
-      .then(response => {
+      .then((response) => {
         setToggle(!toggle);
         clearInputs();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   };
 
   return (
@@ -123,7 +124,9 @@ const Form = ({
         {toggle ? (
           <>
             <div className="btnContainer">
-              <button onClick={handleLogin}><span style={{fontSize:'1.5em'}}>Sign in</span></button>
+              <button onClick={handleLogin}>
+                <span style={{ fontSize: "1.5em" }}>Sign in</span>
+              </button>
               <p>
                 Don't have an account?
                 <span
@@ -141,7 +144,9 @@ const Form = ({
         ) : (
           <>
             <div className="btnContainer">
-              <button onClick={handleSignup}><span style={{fontSize:'1.5em'}}>Sign up</span></button>
+              <button onClick={handleSignup}>
+                <span style={{ fontSize: "1.5em" }}>Sign up</span>
+              </button>
               <p>
                 Have an account?
                 <span

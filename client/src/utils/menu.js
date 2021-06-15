@@ -1,8 +1,9 @@
 import { Menu } from "antd";
 import axios from 'axios';
+import { SERVER_ORIGIN } from "../config";
 
 const handleLogout = () => {
-    axios.post('http://localhost:8080/users/logout',{},{
+    axios.post(`${SERVER_ORIGIN}users/logout`,{},{
         withCredentials:true
     }).then(response => {
         window.location.reload();
